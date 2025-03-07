@@ -18,37 +18,12 @@ namespace PruebaExamen.Controllers
             return View(departamentos);
         }
         public async Task<IActionResult> Details
-            (int? posicion, int idDepartamento)
+            ( int idDepartamento)
         {
-            if (posicion == null)
-            {
-                posicion = 1;
-            }
-            
-            ModelEmpleadoDepartamento model =
-                await this.repo.GetEmpleadoDepartamentoOutAsync(posicion.Value, idDepartamento);
             Departamento departamento =
                 await this.repo.FindDepartamentoAsync(idDepartamento);
-
             ViewData["DEPTSELECCIONADO"] = departamento;
-            ViewData["REGISTROS"] = model.NumeroRegistros;
-            ViewData["DEPARTAMENTO"] = idDepartamento;
-
-            int siguiente = posicion.Value + 1;
-            if (siguiente > model.NumeroRegistros)
-            {
-                siguiente = model.NumeroRegistros;
-            }
-            int anterior = posicion.Value - 1;
-            if (anterior < 1)
-            {
-                anterior = 1;
-            }
-            ViewData["UTLIMO"] = model.NumeroRegistros;
-            ViewData["SIGUIENTE"] = siguiente;
-            ViewData["ANTERIOR"] = anterior;
-            ViewData["POSICION"] = posicion;
-            return View(model.Empleados);
+            return View();
         }
         public async Task<IActionResult> _EmpleadoDepartamentoOutPartial
             (int? posicion, int idDepartamento)
