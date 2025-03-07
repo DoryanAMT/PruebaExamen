@@ -1,0 +1,58 @@
+﻿﻿@{
+    ViewData["Title"] = "_EmpleadoDepartamentoOutPartial";
+}
+
+@model List<Empleado>
+
+@{
+    Departamento departamento = ViewData["DEPARTAMENTOSELECCIONADA"] as Departamento;
+}
+
+<h1>Imagen @ViewData["POSICION"] de @ViewData["ULTIMO"]</h1>
+
+<ul class="list-group list-group-horizontal">
+    <li class="list-group-item">
+        <button class="btn btn-dark" onclick="loadEmpleadoPaginacion(1)" id="primero">
+            Primero
+        </button>
+    </li>
+    <li class="list-group-item">
+        <button class="btn btn-dark" onclick="loadEmpleadoPaginacion(@ViewData["ANTERIOR"])" id="anterior">
+            Anterior
+        </button>
+    </li>
+    <li class="list-group-item">
+        <button class="btn btn-dark" onclick="loadEmpleadoPaginacion(@ViewData["SIGUIENTE"])" id="siguiente">
+            Siguiente
+        </button>
+    </li>
+    <li class="list-group-item">
+        <button class="btn btn-dark" onclick="loadEmpleadoPaginacion(@ViewData["ULTIMO"])" id="ultimo">
+            Ultimo
+        </button>
+    </li>
+</ul>
+
+<table class="table table-bordered table-dark">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>APELLIDO</th>
+            <th>OFICIO</th>
+            <th>SALARIO</th>
+            <th>DEPARTAMENTO</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Empleado empleado in Model)
+        {
+            <tr>
+                <td>@empleado.IdEmpleado</td>
+                <td>@empleado.Apellido</td>
+                <td>@empleado.Oficio</td>
+                <td>@empleado.Salario</td>
+                <td>@empleado.DeptNo</td>
+            </tr>
+        }
+    </tbody>
+</table>

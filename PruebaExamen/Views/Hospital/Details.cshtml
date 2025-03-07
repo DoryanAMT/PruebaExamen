@@ -1,0 +1,25 @@
+﻿@{
+    Departamento departamento = ViewData["DEPTSELECCIONADO"] as Departamento;
+}
+<h1>Empleado Registro Departamento</h1>
+
+<ul class="list-group">
+    <li class="list-group-item">Id Departamento: @departamento.IdDepartamento</li>
+    <li class="list-group-item">Nombre: @departamento.Dnombre</li>
+    <li class="list-group-item">Localidad: @departamento.Localidad</li>
+</ul>
+<hr />
+<div id="partialEmpleados"></div>
+
+@section Scripts{
+    <script>
+        function loadEmpleadoPaginacion(posicion){
+            $(document).ready(function (){
+                $("#partialEmpleados").load("/Hospital/_EmpleadoDepartamentoOutPartial?posicion="
+                    + posicion + "&idDepartamento="+@departamento.IdDepartamento);
+
+            });
+        }
+        loadEmpleadoPaginacion(1);
+    </script>
+}
